@@ -1,0 +1,6 @@
+.marquee { overflow: hidden; background: var(--grad-brand); color: #fff; padding: 1.1rem 0; mask-image: none; }
+.marquee__track { display: flex; width: max-content; animation: marquee 55s linear infinite; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__item { display: inline-flex; align-items: center; gap: 0.7rem; padding-inline: 1.6rem; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; white-space: nowrap; }
+.marquee__item::after { content: ''; width: 6px; height: 6px; margin-left: 1.6rem; border-radius: 50%; background: var(--sky); }
+@keyframes marquee { to { transform: translateX(-50%); } }

@@ -1,0 +1,73 @@
+/* Editorial roster: big type, arch portrait, rotating role ribbon, colour wipe on hover. Credentials panel on the right. */
+.leadership { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 4rem); align-items: stretch; }
+.roster { border-top: 1px solid var(--line); }
+.roster > li { border-bottom: 1px solid var(--line); }
+
+.roster__row {
+  position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+  gap: clamp(1.25rem, 4vw, 3rem); padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1rem, 3vw, 2.25rem);
+}
+.roster__row::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; background: var(--grad-brand);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.7s var(--ease);
+}
+.roster__row:hover::before { transform: scaleX(1); }
+
+/* arch portrait */
+.roster__arch { position: relative; width: clamp(104px, 15vw, 168px); aspect-ratio: 3 / 4; }
+.roster__arch::after {
+  content: ''; position: absolute; inset: -9px; border: 2px solid var(--blue); border-radius: 999px 999px 24px 24px; opacity: 0.4;
+  transition: inset 0.5s var(--ease), border-color 0.4s, opacity 0.4s;
+}
+.roster__row:hover .roster__arch::after { inset: -14px; border-color: var(--sky); opacity: 1; }
+.roster__arch-fill {
+  position: relative; width: 100%; height: 100%; overflow: hidden; display: grid; place-items: center; border-radius: 999px 999px 16px 16px;
+  background: var(--grad-brand); color: var(--ice); transition: background 0.4s, color 0.4s, transform 0.5s var(--ease);
+}
+.roster__arch-fill span { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.8rem); letter-spacing: -0.03em; }
+.roster__arch-fill img { width: 100%; height: 100%; object-fit: cover; }
+.roster__row:hover .roster__arch-fill { background: var(--grad-light); color: var(--navy); transform: translateY(-6px); }
+
+/* name */
+.roster__name {
+  font-weight: 800; font-size: clamp(1.8rem, 3.4vw, 3rem); line-height: 1.02; letter-spacing: -0.04em; text-wrap: balance;
+  color: var(--text); transition: color 0.4s, transform 0.6s var(--ease);
+}
+.roster__row:hover .roster__name { color: var(--ice); transform: translateX(14px); }
+.roster__role { margin-top: 0.4rem; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); transition: color 0.4s, transform 0.6s var(--ease); }
+.roster__row:hover .roster__role { color: var(--ice); transform: translateX(14px); }
+
+/* rotating role ribbon */
+.roster__badge { width: clamp(92px, 11vw, 128px); height: auto; }
+.roster__badge text { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; text-transform: uppercase; fill: var(--blue); transition: fill 0.4s; }
+.roster__badge-ring { transform-origin: center; animation: spin 18s linear infinite; }
+.roster__row:hover .roster__badge-ring { animation-duration: 6s; }
+.roster__row:hover .roster__badge text { fill: var(--ice); }
+.roster__badge-logo { transition: filter 0.4s; }
+.roster__row:hover .roster__badge-logo { filter: brightness(0) invert(1); }
+
+/* credentials panel */
+.credentials {
+  position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; justify-content: center; gap: 1.6rem;
+  padding: clamp(1.75rem, 4vw, 2.5rem); border-radius: var(--radius-l); color: #fff;
+  background: linear-gradient(160deg, var(--ink) 0%, var(--ink-2) 55%, var(--navy) 100%); box-shadow: 0 40px 80px -40px rgba(0, 51, 102, 0.9);
+}
+.credentials__glow { position: absolute; z-index: -1; width: 320px; height: 320px; right: -110px; bottom: -130px; border-radius: 50%; background: var(--blue-bright); opacity: 0.45; filter: blur(70px); animation: pulse 5s ease-in-out infinite; }
+.credentials__title { font-size: clamp(1.4rem, 2.4vw, 1.8rem); }
+.credentials__list { display: grid; gap: 1rem; }
+.credentials__list li { display: flex; gap: 0.9rem; align-items: flex-start; padding: 1rem 1.1rem; border-radius: var(--radius-s); background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line-inverse); }
+.credentials__list strong { display: block; font-family: var(--font-display); font-size: 1.05rem; }
+.credentials__text { display: block; font-size: 0.92rem; line-height: 1.5; color: rgba(255, 255, 255, 0.75); }
+.credentials__check { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(102, 204, 255, 0.14); }
+.credentials__check svg { width: 26px; height: 26px; }
+.credentials__cin { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; align-items: baseline; padding-top: 1.2rem; border-top: 1px dashed var(--line-inverse); font-family: var(--font-display); font-weight: 700; letter-spacing: 0.06em; color: var(--sky); overflow-wrap: anywhere; }
+.credentials__cin span { font-size: 0.78rem; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.6); }
+.credentials__check circle, .credentials__check path { stroke: var(--sky); stroke-dashoffset: 0; animation: none; }
+
+@media (max-width: 960px) { .leadership { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .roster__row { grid-template-columns: auto 1fr; }
+  .roster__badge { grid-column: 2; justify-self: start; width: 84px; }
+  .roster__info { grid-column: 2; }
+  .roster__arch { grid-row: 1 / span 2; }
+}

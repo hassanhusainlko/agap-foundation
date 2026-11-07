@@ -1,0 +1,46 @@
+.about { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+.about__copy { display: grid; gap: 1.4rem; max-width: 40rem; }
+.about__copy > p { color: var(--muted); }
+.about__copy > p:first-child { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.25rem, 2.2vw, 1.55rem); line-height: 1.5; color: var(--text); letter-spacing: -0.01em; }
+
+.about__partners { display: grid; gap: 0.8rem; margin-top: 0.5rem; }
+.about__label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); }
+.about__chips { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.about__chips li {
+  display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.55rem 1.1rem 0.55rem 0.55rem; border-radius: 999px;
+  background: #fff; border: 1px solid var(--line); box-shadow: 0 10px 24px -16px rgba(0, 102, 204, 0.6);
+  font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; cursor: default;
+}
+.about__chip-icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #fff; background: var(--grad-brand); }
+.about__chip-icon svg { width: 18px; height: 18px; }
+
+.about__plaque {
+  display: grid; gap: 0.2rem; width: fit-content; max-width: 100%; margin-top: 0.75rem; padding: 1.1rem 1.4rem; border-radius: var(--radius-s);
+  border: 2px solid transparent; background: linear-gradient(#fff, #fff) padding-box, var(--grad-brand) border-box;
+}
+.about__plaque-label { font-family: var(--font-display); font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+.about__plaque strong { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 0.05em; color: var(--blue); overflow-wrap: anywhere; }
+
+.timeline { position: relative; padding-left: 2.5rem; }
+.timeline__list { display: grid; gap: 1.25rem; }
+.timeline::before { content: ''; position: absolute; left: 11px; top: 18px; bottom: 18px; width: 3px; border-radius: 3px; background: rgba(0, 102, 204, 0.14); }
+.timeline__rail { position: absolute; left: 11px; top: 18px; bottom: 18px; width: 3px; border-radius: 3px; background: var(--grad-brand); transform-origin: top; }
+.timeline__item { position: relative; }
+.timeline__item::before {
+  content: ''; position: absolute; left: -2.5rem; top: 1.45rem; width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 5px solid var(--blue);
+  box-shadow: 0 0 0 0 rgba(51, 153, 255, 0.5); animation: ping-violet 2.6s infinite;
+}
+.timeline__item:last-child::before { border-color: var(--blue-bright); animation-name: ping-gold; }
+@keyframes ping-violet { 70% { box-shadow: 0 0 0 12px rgba(51, 153, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(51, 153, 255, 0); } }
+@keyframes ping-gold { 70% { box-shadow: 0 0 0 12px rgba(0, 102, 204, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0); } }
+
+.timeline__card {
+  padding: 1.4rem 1.6rem; border-radius: var(--radius-s); background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 16px 40px -22px rgba(0, 102, 204, 0.45); transition: box-shadow 0.35s;
+}
+.timeline__card:hover { box-shadow: 0 22px 50px -20px rgba(0, 102, 204, 0.6); }
+.timeline__year { font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; letter-spacing: -0.03em; background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.timeline__card h3 { font-size: 1.1rem; margin: 0.2rem 0 0.4rem; }
+.timeline__card p { font-size: 0.98rem; color: var(--muted); line-height: 1.6; }
+
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }

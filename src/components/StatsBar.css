@@ -1,0 +1,18 @@
+.stats {
+  position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line-inverse); border-radius: var(--radius-l);
+  background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(14px); overflow: hidden;
+  animation: stats-in 1s 1.9s var(--ease) both;
+}
+@keyframes stats-in { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+.stat { display: grid; gap: 0.2rem; padding: 1.5rem 1.75rem; }
+.stat + .stat { border-left: 1px solid var(--line-inverse); }
+.stat__value {
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums; background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.stat__label { font-size: 0.95rem; color: rgba(255, 255, 255, 0.72); }
+@media (max-width: 700px) {
+  .stats { grid-template-columns: 1fr; }
+  .stat + .stat { border-left: 0; border-top: 1px solid var(--line-inverse); }
+}

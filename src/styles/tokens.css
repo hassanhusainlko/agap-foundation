@@ -1,0 +1,40 @@
+/* Design tokens. One palette, used everywhere: AGAP navy + blue ramp + white/black (from the logo). */
+:root {
+  color-scheme: light;
+
+  /* brand palette */
+  --navy: #003366;
+  --navy-deep: #001a33;
+  --blue: #0066cc;
+  --blue-bright: #3399ff;
+  --sky: #66ccff;
+  --ice: #ccffff;
+  --white: #ffffff;
+  --black: #000000;
+
+  /* semantic surfaces + text */
+  --ink: var(--navy);
+  --ink-2: var(--navy-deep);
+  --paper: var(--white);
+  --text: var(--black);
+  --muted: rgba(0, 51, 102, 0.78);
+  --line: rgba(0, 51, 102, 0.14);
+  --line-inverse: rgba(255, 255, 255, 0.14);
+  --danger: #b42318;
+  --success: #12b76a;
+
+  --grad-brand: linear-gradient(120deg, #003366 0%, #0066cc 100%);
+  --grad-light: linear-gradient(120deg, #ccffff, #66ccff);
+  --grad-text: linear-gradient(100deg, #ffffff 0%, #ccffff 28%, #66ccff 52%, #3399ff 76%, #ffffff 100%);
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --wrap: 1180px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --header-h: 72px;
+  --section-pad: clamp(4.5rem, 9vw, 7.5rem);
+  --radius-s: 12px;
+  --radius-l: 24px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}

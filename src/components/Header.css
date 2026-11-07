@@ -1,0 +1,76 @@
+.header {
+  position: fixed; inset: 0 0 auto 0; height: var(--header-h); z-index: 50; color: var(--navy);
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: background-color 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+.header[data-scrolled='true'] {
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom-color: var(--line);
+  box-shadow: 0 12px 30px -18px rgba(0, 51, 102, 0.35);
+}
+/* Without backdrop blur a translucent bar would hurt legibility; go nearly opaque instead. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .header, .header[data-scrolled='true'] { background: rgba(255, 255, 255, 0.96); }
+}
+.header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.header__nav { display: flex; align-items: center; gap: 0.9rem; }
+
+.brand { display: flex; align-items: center; text-decoration: none; }
+.brand__logo { display: block; width: auto; height: 58px; }
+
+.nav ul { display: flex; gap: 0.2rem; }
+.nav li { opacity: 0; animation: fade-in 0.6s forwards; animation-delay: calc(var(--i) * 90ms + 1000ms); }
+.nav__link {
+  position: relative; display: block; padding: 0.6rem 1rem; border-radius: 999px; text-decoration: none;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.92rem; color: var(--navy); transition: color 0.25s, background 0.25s;
+}
+.nav__link:hover { color: var(--blue); background: rgba(0, 102, 204, 0.08); }
+.nav__link[aria-current] { color: #fff; font-weight: 700; }
+.nav__link[aria-current]:hover { background: transparent; }
+.nav__label { position: relative; }
+/* active pill glides between links (Framer layoutId) */
+.nav__pill { position: absolute; inset: 0; border-radius: 999px; background: var(--blue); box-shadow: 0 8px 22px -8px rgba(0, 51, 102, 0.45); }
+
+/* Navbar CTA: the donation route. Solid brand gradient so it stands out from the links. */
+.header__cta {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  padding: 0.78rem 1.35rem; border-radius: 999px; text-decoration: none;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; line-height: 1;
+  color: #fff; background: var(--grad-brand); background-size: 150% 100%;
+  box-shadow: 0 10px 24px -12px rgba(0, 51, 102, 0.75);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s, background-position 0.4s;
+}
+.header__cta:hover { transform: translateY(-2px); background-position: 100% 0; box-shadow: 0 16px 30px -12px rgba(0, 102, 204, 0.8); }
+.header__cta[aria-current='page'] {
+  background-position: 100% 0;
+  box-shadow: 0 0 0 2px var(--navy), 0 0 0 5px rgba(102, 204, 255, 0.6), 0 10px 24px -12px rgba(0, 51, 102, 0.75);
+}
+
+.header__progress { position: absolute; left: 0; bottom: -1px; width: 100%; height: 3px; background: linear-gradient(90deg, #0066cc, #3399ff, #66ccff); transform-origin: left; }
+.header__toggle { display: grid; place-items: center; width: 44px; height: 44px; background: rgba(0, 102, 204, 0.06); border: 1px solid var(--line); border-radius: 12px; color: inherit; cursor: pointer; }
+
+@keyframes fade-in { to { opacity: 1; } }
+
+@media (max-width: 1240px) {
+  .header__nav { gap: 0.6rem; }
+  .nav__link { padding: 0.55rem 0.7rem; font-size: 0.86rem; }
+  .header__cta { padding: 0.72rem 1rem; font-size: 0.82rem; }
+}
+
+@media (max-width: 1120px) {
+  .brand__logo { height: 48px; }
+  .nav--mobile {
+    position: absolute; top: var(--header-h); left: 0; right: 0;
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(22px) saturate(1.5);
+    backdrop-filter: blur(22px) saturate(1.5);
+    box-shadow: 0 30px 60px -20px rgba(0, 51, 102, 0.35); border-bottom: 1px solid var(--line); padding: 0.5rem var(--gutter) 1.25rem;
+  }
+  .nav--mobile ul { flex-direction: column; gap: 0.25rem; }
+  .nav--mobile li { opacity: 1; animation: none; }
+  .nav--mobile .nav__link { padding: 0.9rem 1rem; font-size: 1.05rem; }
+  .nav--mobile .header__cta { width: 100%; margin-top: 0.75rem; padding: 0.95rem 1.2rem; font-size: 0.95rem; }
+}

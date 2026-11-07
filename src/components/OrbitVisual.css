@@ -1,0 +1,35 @@
+.orbit { --size: clamp(300px, 36vw, 500px); position: relative; width: var(--size); aspect-ratio: 1; justify-self: center; animation: orbit-in 1.4s 1.2s var(--ease) both; }
+@keyframes orbit-in { from { opacity: 0; transform: scale(0.7) rotate(-30deg); } to { opacity: 1; transform: none; } }
+
+.orbit__core {
+  position: absolute; inset: 33%; border-radius: 50%; display: grid; place-items: center; color: #fff;
+  background: radial-gradient(circle, rgba(51, 153, 255, 0.55), rgba(0, 102, 204, 0.12) 70%);
+  box-shadow: 0 0 90px rgba(51, 153, 255, 0.55); animation: pulse 4s ease-in-out infinite;
+}
+.orbit__core svg { width: 62%; }
+
+.orbit__ring {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: var(--d); height: var(--d); border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.22); animation: spin var(--dur) linear infinite; animation-direction: var(--dir);
+}
+.orbit__ring--outer { --d: var(--size); }
+.orbit__ring--inner { --d: calc(var(--size) * 0.64); border-color: rgba(102, 204, 255, 0.32); }
+
+.orbit__item { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateX(calc(var(--d) / 2)); }
+.orbit__icon {
+  position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; display: grid; place-items: center; color: #fff;
+  border-radius: 50%; background: linear-gradient(145deg, var(--blue), var(--navy));
+  border: 1px solid rgba(102, 204, 255, 0.7); box-shadow: 0 8px 24px rgba(0, 102, 204, 0.55);
+  rotate: calc(var(--a) * -1); animation: spin var(--dur) linear infinite; animation-direction: var(--dir-inv);
+  transition: scale 0.3s var(--ease);
+}
+.orbit__icon:hover { scale: 1.25; z-index: 3; }
+.orbit__icon::after {
+  content: attr(data-label); position: absolute; top: calc(100% + 8px); left: 50%; translate: -50% 0; white-space: nowrap;
+  padding: 0.3rem 0.7rem; border-radius: 999px; font-family: var(--font-display); font-size: 0.78rem; font-weight: 600;
+  background: var(--ink); border: 1px solid var(--line-inverse); opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.orbit__icon:hover::after { opacity: 1; }
+.orbit:hover .orbit__ring, .orbit:hover .orbit__icon { animation-play-state: paused; }
+
+@media (max-width: 960px) { .orbit { display: none; } }

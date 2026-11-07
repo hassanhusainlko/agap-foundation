@@ -1,0 +1,86 @@
+.connect { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: stretch; }
+.connect__info { display: grid; gap: 1.75rem; align-content: space-between; }
+
+/* topic chips that pre-fill the form */
+.topics { padding: 1.5rem; border-radius: var(--radius-l); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line-inverse); }
+.topics h3 { font-size: 1.15rem; margin-bottom: 1rem; }
+.topics__list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.topics__chip {
+  position: relative; min-height: 44px; padding: 0.6rem 1.1rem; border-radius: 999px; cursor: pointer;
+  font: 600 0.95rem var(--font-display); color: rgba(255, 255, 255, 0.85); background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line-inverse);
+  transition: color 0.25s, border-color 0.25s;
+}
+.topics__chip:hover { border-color: rgba(102, 204, 255, 0.6); color: #fff; }
+.topics__chip[aria-pressed='true'] { color: var(--ink); border-color: transparent; }
+.topics__pill { position: absolute; inset: -1px; border-radius: inherit; background: var(--grad-light); box-shadow: 0 10px 24px -10px rgba(0, 102, 204, 0.8); }
+.topics__label { position: relative; }
+.connect__block { display: flex; gap: 1.1rem; }
+.connect__icon {
+  flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: #fff;
+  background: var(--grad-brand); box-shadow: 0 10px 26px -8px rgba(0, 102, 204, 0.8);
+}
+.connect__block h3 { font-size: 1.1rem; margin-bottom: 0.35rem; }
+.connect__block address, .connect__block a { display: block; color: rgba(255, 255, 255, 0.8); text-decoration: none; overflow-wrap: anywhere; }
+.connect__block a { width: fit-content; background: linear-gradient(var(--sky), var(--sky)) left bottom / 0 2px no-repeat; transition: background-size 0.4s var(--ease), color 0.2s; }
+.connect__block a:hover { color: #fff; background-size: 100% 2px; }
+
+.socials { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+.socials a {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.95rem 1.1rem; text-decoration: none; border-radius: var(--radius-s);
+  border: 1px solid var(--line-inverse); background: rgba(255, 255, 255, 0.04); font-family: var(--font-display); font-weight: 600;
+  transition: transform 0.3s var(--ease), background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.socials a:hover { transform: translateY(-4px); background: var(--grad-brand); border-color: transparent; box-shadow: 0 14px 30px -10px rgba(0, 102, 204, 0.8); }
+
+/* form card */
+.connect__form { position: relative; overflow: hidden; background: var(--paper); color: var(--text); border-radius: var(--radius-l); padding: clamp(1.5rem, 4vw, 2.6rem); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7); }
+.connect__form::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--grad-brand); }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.field--wide, .form__error, .form__submit { grid-column: 1 / -1; }
+/* form card matches the info column's height; the message box absorbs the difference */
+.connect__form { display: flex; flex-direction: column; }
+.form { flex: 1; grid-template-rows: auto auto 1fr; }
+.field--wide { grid-template-rows: auto 1fr; }
+.field--wide textarea { height: 100%; }
+@media (max-width: 560px) { .form { grid-template-columns: 1fr; grid-template-rows: none; } }
+.field { display: grid; gap: 0.4rem; }
+.field label { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; }
+.field__optional { font-weight: 400; color: var(--muted); }
+.field input, .field select, .field textarea {
+  width: 100%; font: inherit; font-size: 1rem; color: var(--text); background: var(--ice); padding: 0.9rem 1.05rem;
+  border: 1.5px solid transparent; border-radius: var(--radius-s); transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.field select {
+  appearance: none; padding-right: 2.6rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230066cc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 1rem center;
+}
+.field textarea { resize: vertical; min-height: 8rem; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; background-color: #fff; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(51, 153, 255, 0.18); }
+.field[data-invalid='true'] input, .field[data-invalid='true'] select, .field[data-invalid='true'] textarea { border-color: var(--danger); background-color: #fef3f2; animation: shake 0.4s; }
+@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.field__error, .form__error { color: var(--danger); font-family: var(--font-display); font-weight: 500; font-size: 0.9rem; }
+.form__submit { justify-self: start; }
+
+.form__notice {
+  grid-column: 1 / -1; padding: 0.85rem 1rem; border-radius: var(--radius-s);
+  color: var(--navy); background: var(--ice); border: 1px solid rgba(0, 102, 204, 0.25);
+  font-size: 0.9rem; line-height: 1.55;
+}
+.form__notice strong { font-family: var(--font-display); }
+.form__notice-link {
+  padding: 0; border: 0; background: none; font: inherit; color: var(--blue);
+  text-decoration: underline; text-underline-offset: 2px; cursor: pointer;
+}
+.form__notice-link:hover { color: var(--navy); }
+
+.form-success { display: grid; gap: 0.9rem; justify-items: start; padding: 1rem 0; animation: success-in 0.5s var(--ease); }
+.form-success h3 { font-size: 1.9rem; }
+.form-success p { color: var(--muted); }
+.form-success .btn { margin-top: 0.5rem; }
+.check__circle { stroke-dasharray: 151; stroke-dashoffset: 151; animation: draw 0.8s var(--ease) forwards; }
+.check__tick { stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw 0.5s 0.6s var(--ease) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes success-in { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 860px) { .connect { grid-template-columns: 1fr; } }

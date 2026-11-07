@@ -1,0 +1,9 @@
+.reveal {
+  opacity: 0;
+  transition: opacity 0.65s var(--ease) var(--delay, 0ms), transform 0.65s var(--ease) var(--delay, 0ms);
+}
+.reveal--up { transform: translateY(20px); }
+.reveal--left { transform: translateX(-24px); }
+.reveal--right { transform: translateX(24px); }
+.reveal--scale { transform: scale(0.97); }
+.reveal.is-visible { opacity: 1; transform: none; }
