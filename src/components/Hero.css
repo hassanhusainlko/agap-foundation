@@ -1,12 +1,43 @@
 .hero {
   position: relative; isolation: isolate; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 3.5rem;
-  overflow: hidden; padding: calc(var(--header-h) + 3rem) 0 3rem; color: #fff; background: var(--ink);
+  overflow: hidden; padding: calc(var(--header-h) + 3rem) 0 3rem; color: #fff; background: var(--ink-2);
 }
-.hero__aurora span { position: absolute; z-index: -2; border-radius: 50%; filter: blur(90px); opacity: 0.55; will-change: transform; }
+
+/* Photo slideshow: each image fills the hero without stretching (object-fit: cover). */
+.hero__slides { position: absolute; inset: 0; z-index: -4; overflow: hidden; background: var(--ink-2); }
+.hero__slide {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;
+  opacity: 0; transform: scale(1); will-change: opacity, transform;
+  transition: opacity 1.8s var(--ease), transform 9s linear;
+}
+.hero__slide.is-active { opacity: 1; transform: scale(1.05); }
+
+/* Dark scrim: keeps the photo visible on the right while the left stays readable for text. */
+.hero__scrim {
+  position: absolute; inset: 0; z-index: -3; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 14, 28, 0.72) 0%, rgba(0, 17, 34, 0.4) 38%, rgba(0, 14, 28, 0.8) 100%),
+    linear-gradient(95deg, rgba(0, 14, 28, 0.92) 0%, rgba(0, 17, 34, 0.78) 42%, rgba(0, 17, 34, 0.44) 72%, rgba(0, 14, 28, 0.62) 100%);
+}
+
+/* Slide picker on the right edge. */
+.hero__dots {
+  position: absolute; z-index: 2; right: clamp(0.75rem, 2.2vw, 1.75rem); top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.65rem;
+}
+.hero__dot-btn {
+  width: 9px; height: 9px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(255, 255, 255, 0.45); transition: height 0.35s var(--ease), background 0.35s var(--ease);
+}
+.hero__dot-btn:hover { background: rgba(255, 255, 255, 0.8); }
+.hero__dot-btn.is-active { height: 26px; background: var(--sky); }
+.hero__dot-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.hero__aurora span { position: absolute; z-index: -2; border-radius: 50%; filter: blur(90px); opacity: 0.3; will-change: transform; }
 .hero__aurora span:nth-child(1) { width: 46vw; height: 46vw; left: -12vw; top: -14vw; background: #0066cc; animation: drift-a 22s ease-in-out infinite alternate; }
 .hero__aurora span:nth-child(2) { width: 38vw; height: 38vw; right: -8vw; top: 4vw; background: #3399ff; animation: drift-b 26s ease-in-out infinite alternate; }
 .hero__aurora span:nth-child(3) { width: 34vw; height: 34vw; left: 28vw; bottom: -16vw; background: #66ccff; animation: drift-c 24s ease-in-out infinite alternate; }
-.hero__canvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; }
+.hero__canvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.55; }
 
 .hero__grid { position: relative; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem; align-items: center; }
 .hero__content { max-width: 46rem; }
@@ -54,3 +85,8 @@
 .hero__actions .btn:hover svg { transform: translateX(4px); }
 
 @media (max-width: 960px) { .hero__grid { grid-template-columns: 1fr; } .hero__visual { display: none; } }
+@media (max-width: 700px) { .hero__dots { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide { transition: none; }
+  .hero__slide.is-active { transform: none; }
+}
