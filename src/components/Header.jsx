@@ -7,6 +7,8 @@ import { EASE } from './motion.js';
 import './Header.css';
 
 const SECTION_IDS = navLinks.map((link) => link.id);
+// The donation CTA is not a nav link, but it still needs an active state while its section is on screen.
+const SPY_IDS = [...SECTION_IDS, donation.cta.href.slice(1)];
 const MOBILE_QUERY = '(max-width: 1120px)';
 
 function useMediaQuery(query) {
@@ -61,14 +63,14 @@ function HeaderCta({ onNavigate, current }) {
   );
 }
 
-export default function Header({ route = 'home' }) {
-  const observedId = useScrollSpy(SECTION_IDS, route === 'home');
+export default function Header() {
+  const observedId = useScrollSpy(SPY_IDS);
   const isMobile = useMediaQuery(MOBILE_QUERY);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   // Highlight a clicked section immediately instead of waiting for the smooth scroll to finish.
   const [pendingId, setPendingId] = useState(null);
-  const activeId = route === 'home' ? (pendingId ?? observedId) : null;
+  const activeId = pendingId ?? observedId;
 
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 160, damping: 30, restDelta: 0.001 });
@@ -100,11 +102,6 @@ export default function Header({ route = 'home' }) {
       window.clearTimeout(timer);
     };
   }, [pendingId, observedId]);
-
-  // The donate route has no section highlight, so drop any in-flight selection.
-  useEffect(() => { if (route === 'donate') setPendingId(null); }, [route]);
-
-  const close = () => setMenuOpen(false);
 
   const navigate = useCallback((id) => {
     setPendingId(id);
@@ -153,7 +150,7 @@ export default function Header({ route = 'home' }) {
                   exit={{ clipPath: 'inset(0 0 100% 0)', transition: { duration: 0.3, ease: EASE } }}
                 >
                   <NavLinks activeId={activeId} onNavigate={navigate} animated />
-                  <HeaderCta onNavigate={close} current={route === 'donate'} />
+                  <HeaderCta onNavigate={() => navigate('donate')} current={activeId === 'donate'} />
                 </motion.nav>
               )}
             </AnimatePresence>
@@ -163,7 +160,7 @@ export default function Header({ route = 'home' }) {
             <nav id="primary-nav" className="nav" aria-label="Primary">
               <NavLinks activeId={activeId} onNavigate={navigate} />
             </nav>
-            <HeaderCta current={route === 'donate'} />
+            <HeaderCta onNavigate={() => navigate('donate')} current={activeId === 'donate'} />
           </div>
         )}
       </div>

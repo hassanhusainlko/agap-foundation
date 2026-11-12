@@ -22,10 +22,9 @@ npm run build    # production build in /dist
 | Pillar icons | `icon` key in `siteContent.js` + `pillarIcons` in `src/components/icons.jsx` |
 | Scroll animations | `src/components/Reveal.jsx` (`variant`, `delay`); shared timing/easing in `src/components/motion.js` |
 | Section intro text (right of each heading) | `intro` on each section in `siteContent.js` |
-| "How We Work" steps | `approach` in `siteContent.js` |
 | Compliance panel beside Leadership | `leadership.credentials` in `siteContent.js` |
 | Nav links | `navLinks` in `siteContent.js` (each `id` must match a section `id`) |
-| Donation page copy + bank details | `donation` in `siteContent.js` (route: `#/donate`) |
+| Donation section copy + bank details | `donation` in `siteContent.js` (section: `#donate`) |
 
 Each component has a co-located `.css` file. Add a director photo by putting an image in `public/team/` and adding `photo: '/team/name.jpg'` to the person in `siteContent.js`.
 

@@ -34,7 +34,7 @@
 /* active pill glides between links (Framer layoutId) */
 .nav__pill { position: absolute; inset: 0; border-radius: 999px; background: var(--blue); box-shadow: 0 8px 22px -8px rgba(0, 51, 102, 0.45); }
 
-/* Navbar CTA: the donation route. Solid brand gradient so it stands out from the links. */
+/* Navbar CTA: jumps to the donation section. Solid brand gradient so it stands out from the links. */
 .header__cta {
   display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
   padding: 0.78rem 1.35rem; border-radius: 999px; text-decoration: none;

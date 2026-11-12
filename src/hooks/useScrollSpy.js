@@ -5,7 +5,6 @@ export default function useScrollSpy(ids, enabled = true) {
   const [activeId, setActiveId] = useState(ids[0]);
 
   useEffect(() => {
-    // Sections unmount on the donation page; re-observe them when they return.
     if (!enabled) return undefined;
     const observer = new IntersectionObserver(
       (entries) => {

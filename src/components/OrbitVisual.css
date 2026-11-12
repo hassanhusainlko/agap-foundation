@@ -6,7 +6,7 @@
   background: radial-gradient(circle, rgba(51, 153, 255, 0.55), rgba(0, 102, 204, 0.12) 70%);
   box-shadow: 0 0 90px rgba(51, 153, 255, 0.55); animation: pulse 4s ease-in-out infinite;
 }
-.orbit__core svg { width: 62%; }
+.orbit__logo { display: block; width: 86%; height: auto; }
 
 .orbit__ring {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: var(--d); height: var(--d); border-radius: 50%;

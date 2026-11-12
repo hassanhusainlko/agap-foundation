@@ -1,5 +1,5 @@
 import { pillars } from '../data/siteContent.js';
-import { LogoMark, pillarIcons } from './icons.jsx';
+import { pillarIcons } from './icons.jsx';
 import './OrbitVisual.css';
 
 // Two rings of pillar icons orbiting the logo. Tweak speed, direction and layout here.
@@ -11,7 +11,9 @@ const RINGS = [
 export default function OrbitVisual() {
   return (
     <div className="orbit" aria-hidden="true">
-      <div className="orbit__core"><LogoMark /></div>
+      <div className="orbit__core">
+        <img className="orbit__logo" src="/logo-white.png" alt="" width="520" height="315" />
+      </div>
       {RINGS.map((ring) => (
         <div
           key={ring.name}

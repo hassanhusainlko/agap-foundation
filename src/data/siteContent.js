@@ -13,7 +13,6 @@ export const navLinks = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About Us' },
   { id: 'pillars', label: 'Core Pillars' },
-  { id: 'approach', label: 'How We Work' },
   { id: 'leadership', label: 'Leadership' },
   { id: 'connect', label: 'Connect With Us' },
 ];
@@ -26,9 +25,9 @@ export const hero = {
   secondaryCta: { label: 'Partner With Us', href: '#connect' },
 };
 
-// Donation page and the navbar CTA that opens it (hash route, not a section anchor).
+// Donation section on the landing page (below Core Capabilities) and the navbar CTA that jumps to it.
 export const donation = {
-  cta: { label: 'Contribute to Our Mission', href: '#/donate' },
+  cta: { label: 'Contribute to Our Mission', href: '#donate' },
   eyebrow: 'Support AGAP Foundation',
   title: 'Contribute to Our Mission',
   intro:
@@ -87,34 +86,6 @@ export const pillarsSection = {
   title: 'Core Capabilities',
   subtitle: 'The 9 Functional Pillars',
   intro: 'From research and fellowships to GovTech and fiscal advisory, each pillar strengthens a different part of how public systems plan, spend and deliver.',
-};
-
-// How the pillars connect in practice. Each step is drawn from a pillar description above.
-export const approach = {
-  title: 'How We Work',
-  intro: 'Evidence first, proof on the ground, then scale. Every engagement moves through the same four stages.',
-  steps: [
-    {
-      icon: 'research',
-      title: 'Diagnose',
-      text: 'Ground-level empirical studies, budget analysis and scheme impact assessments establish what is actually happening.',
-    },
-    {
-      icon: 'file',
-      title: 'Design',
-      text: 'Briefing notes, resolution drafts, fiscal plans and data dashboards are built with the institutions that will use them.',
-    },
-    {
-      icon: 'flask',
-      title: 'Pilot',
-      text: 'Village-level pilot programs establish proof of concept on the ground before any policy is scaled.',
-    },
-    {
-      icon: 'landmark',
-      title: 'Audit & Scale',
-      text: 'Rigorous social audits validate results, then capacity building helps administrations scale state-wide.',
-    },
-  ],
 };
 
 // `short` is the label in the list; `title` and `description` show in the detail panel.
