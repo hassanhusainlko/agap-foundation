@@ -1,9 +1,6 @@
-import { motion } from 'framer-motion';
-import { leadership, site } from '../data/siteContent.js';
+import { leadership } from '../data/siteContent.js';
 import Reveal from './Reveal.jsx';
 import Section from './Section.jsx';
-import { Check } from './icons.jsx';
-import { VIEWPORT, item, stagger } from './motion.js';
 import './Leadership.css';
 
 const initials = (name) => name.split(' ').map((part) => part[0]).join('');
@@ -37,43 +34,31 @@ function RoleBadge({ role, id }) {
 export default function Leadership() {
   return (
     <Section id="leadership" tone="mist" title={leadership.title} intro={leadership.intro}>
-      <div className="leadership">
-        <ul className="roster">
-          {leadership.people.map((person, i) => (
-            <Reveal as="li" key={person.name} variant="left" delay={i * 120}>
-              <article className="roster__row">
-                <div className="roster__arch">
-                  <div className="roster__arch-fill">
-                    {person.photo ? <img src={person.photo} alt={person.name} /> : <span aria-hidden="true">{initials(person.name)}</span>}
+      <ul className="roster">
+        {leadership.people.map((person, i) => (
+          <Reveal as="li" key={person.name} variant="left" delay={i * 120}>
+            <article className="roster__row">
+              <div className="roster__arch">
+                <div className="roster__arch-fill">
+                  {person.photo ? <img src={person.photo} alt={person.name} /> : <span aria-hidden="true">{initials(person.name)}</span>}
+                </div>
+              </div>
+              <div className="roster__info">
+                <h3 className="roster__name">{person.name}<span className="sr-only">, {person.role}</span></h3>
+                <p className="roster__role" aria-hidden="true">{person.role}</p>
+                {person.bio && (
+                  <div className="roster__bio">
+                    {person.bio.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
                   </div>
-                </div>
-                <div className="roster__info">
-                  <h3 className="roster__name">{person.name}<span className="sr-only">, {person.role}</span></h3>
-                  <p className="roster__role" aria-hidden="true">{person.role}</p>
-                </div>
-                <RoleBadge role={person.role} id={i} />
-              </article>
-            </Reveal>
-          ))}
-        </ul>
-
-        <Reveal as="aside" variant="right" className="credentials" aria-labelledby="credentials-title">
-          <span className="credentials__glow" aria-hidden="true" />
-          <h3 id="credentials-title" className="credentials__title">Governance &amp; compliance</h3>
-          <motion.ul className="credentials__list" variants={stagger(0.14, 0.3)} initial="hidden" whileInView="visible" viewport={VIEWPORT}>
-            {leadership.credentials.map((c) => (
-              <motion.li key={c.label} variants={item} whileHover={{ x: 6 }}>
-                <span className="credentials__check"><Check /></span>
-                <span>
-                  <strong>{c.label}</strong>
-                  <span className="credentials__text">{c.text}</span>
-                </span>
-              </motion.li>
-            ))}
-          </motion.ul>
-          <p className="credentials__cin"><span>CIN</span>{site.cin}</p>
-        </Reveal>
-      </div>
+                )}
+              </div>
+              <RoleBadge role={person.badge || person.role} id={i} />
+            </article>
+          </Reveal>
+        ))}
+      </ul>
     </Section>
   );
 }

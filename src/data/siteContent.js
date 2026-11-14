@@ -167,16 +167,26 @@ export const pillars = [
 export const leadership = {
   title: 'Our Leadership',
   intro: 'AGAP Foundation is directed by a board accountable under the Companies Act, 2013, and run on public-interest compliance.',
-  // Compliance credentials (same facts as the footer), shown beside the directors.
-  credentials: [
-    { label: 'Section 8 Company', text: 'Non-profit, registered under the Companies Act, 2013 (Govt. of India)' },
-    { label: 'NGO Darpan', text: 'Registered with NITI Aayog' },
-    { label: '12A & 80G', text: 'Tax-exempt status compliant' },
-  ],
   // Add `photo: '/team/name.jpg'` (file in /public/team) to replace the monogram.
+  // `badge` is the short word on the rotating ribbon; it falls back to `role`.
   people: [
-    { name: 'Prasun Kumar', role: 'Director' },
-    { name: 'Sukriti Shandilya', role: 'Director' },
+    {
+      name: 'Prasun Kumar',
+      role: 'Director & Founder',
+      badge: 'Founder',
+      bio: [
+        'A political strategist, governance expert, and public policy advisor with over a decade of professional experience in large-scale strategic communications, campaign structures, and administrative systems design.',
+        'He specialises in engineering data-driven public outreach frameworks and advising public leaders on legislative and institutional reforms across India.',
+      ],
+    },
+    {
+      name: 'Sukriti Shandilya',
+      role: 'Director',
+      bio: [
+        'A practicing advocate at the Patna High Court specialising in institutional law and regulatory compliance, paired with a dedicated research background in public governance and policy structures.',
+        "She brings rigorous legal oversight to the foundation's administrative frameworks and policy drafting initiatives.",
+      ],
+    },
   ],
 };
 
